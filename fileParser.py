@@ -44,12 +44,6 @@ def outputData (path, data):
 	numIntersections =0
 	#Line 0
 	file.write(f"{len(data)}\n")
-	""" for library in data:
-		file.write(f"{library['id']} {len(library['books'])}\n")
-		for bookId in library["books"]:
-			file.write(f"{bookId} ")
-		file.write("\n")
-	file.close """
 	#Dict[int (Intersection), List[Tuple[str (Street), int (Time Green)]]]
 
 	for interNum, intersection in data.items():
