@@ -14,21 +14,24 @@ def parseFile(path):
 	}
 	# Extract book scores
 	data["streetInfo"] = [int(number) for number in lines[1].split()]
-	libraries = []
-	for libraryNumber in range(0, data["numStreets"]):
-		index = (libraryNumber + 1)*2
-		infoLine = lines[index].split()
-		bookLine = lines[index+1].split()
-		library = {
-			"numberOfBooks": int(infoLine[0]),
-			"signup": int(infoLine[1]),
-			"rate": int(infoLine[2]),
-			"books": [int(book) for book in bookLine]
+	streets = []
+
+	for streetNum in range(1, data["numStreets"]):
+		
+		streetLine = lines[streetNum].split()
+		street = {
+			"interStart": int(streetLine[0]),
+			"interEnd": int(streetLine[1]),
+			"name": int(streetLine[2]),
+			"timeTaken": int(streetLine[3]),
 		}
-		libraries.append(library)
-	file.close()
-	data["libraries"] = libraries
-	return data
+
+		streets.append(street)
+		file.close()
+		data["streets"] = streets
+		return data
+
+
 
 def outputData (path, data):
 	file = open(path, "w")
