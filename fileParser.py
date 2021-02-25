@@ -55,8 +55,11 @@ def outputData (path, data):
 	for interNum, intersection in data.items():
 
 		numIntersections +=1
+
+		if not (length := len(intersection)):
+			continue
 		file.write(interNum + "\n")
-		file.write(str(len(intersection)) + "\n")
+		file.write(str(length) + "\n")
 		
 		for street in intersection:
 
