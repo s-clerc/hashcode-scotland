@@ -50,19 +50,19 @@ def outputData (path, data):
 			file.write(f"{bookId} ")
 		file.write("\n")
 	file.close """
-	#Dict[int (Intersection), List[Tuple[str (Street), int (Time Green)]]]
+	#Dict[str (Intersection), List[Tuple[str (Street), int (Time Green)]]]
 
 	for interNum, intersection in data.items():
 
 		numIntersections +=1
-		file.write(interNum, "\n")
-		file.write(len(intersection))
+		file.write(interNum + "\n")
+		file.write(str(len(intersection)) + "\n")
 		
 		for street in intersection:
 
 			streetName = street[0]
 			greenTime = street[1]
-			file.write(streetName, " ", greenTime, "\n")
+			file.write(streetName + " " +  str(greenTime) + "\n")
 
 
 	file.close()
