@@ -28,9 +28,9 @@ def parseFile(path):
 	next_id = 0
 	for n in range(data.number_of_streets):
 		start, end, name, length = lines[1+n].split()
-		start, end, length = (int(v) for v in (start, end, length))
-		data.graph.add_edge(start, end, length)
-		data.streets[name] = (start, end, length)
+		start, end, length = (v for v in (start, end, length))
+		data.graph.add_edge(start, end, int(length))
+		data.streets[name] = (start, end, int(length))
 		data.costreets[(start, end)] = name
 
 	for n in range(data.number_of_cars):
