@@ -5,14 +5,17 @@ def parseFile(path):
 	# Get number of each from line 0
 	line = lines[0].split()
 	data = {
-		"numberOfBooks": int(line[0]),
-		"numberOfLibraries": int(line[1]),
-		"numberOfDays": int(line[2])
+		"time": int(line[0]),
+		"intersections": int(line[1]),
+		"numStreets": int(line[2]),
+		"numCars": int(line[3]),
+		"points": int(line[4])
+
 	}
 	# Extract book scores
-	data["bookScores"] = [int(number) for number in lines[1].split()]
+	data["streetInfo"] = [int(number) for number in lines[1].split()]
 	libraries = []
-	for libraryNumber in range(0, data["numberOfLibraries"]):
+	for libraryNumber in range(0, data["numStreets"]):
 		index = (libraryNumber + 1)*2
 		infoLine = lines[index].split()
 		bookLine = lines[index+1].split()
