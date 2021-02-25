@@ -1,33 +1,38 @@
+from dataclasses import dataclass
+from graph import Graph
+import sys
+from typing import *
+
+@dataclass
+class Data:
+	time: int
+	number_of_intersections: int
+	number_of_streets: int
+	number_of_cars: int
+	points: int
+	graph: Graph
+	cars: List[str]
+	streets: Dict[str, Tuple[int, int, int]]
+
 def parseFile(path):
 	file = open(path, "r")
 
 	lines = file.readlines()
 	# Get number of each from line 0
 	line = lines[0].split()
-	data = {
-		"time": int(line[0]),
-		"intersections": int(line[1]),
-		"numStreets": int(line[2]),
-		"numCars": int(line[3]),
-		"points": int(line[4])
+	data = Data(*[int(value) for value in line], Graph(), [], {})
 
-	}
-	# Extract book scores
-	data["streetInfo"] = [int(number) for number in lines[1].split()]
-	libraries = []
-	for libraryNumber in range(0, data["numStreets"]):
-		index = (libraryNumber + 1)*2
-		infoLine = lines[index].split()
-		bookLine = lines[index+1].split()
-		library = {
-			"numberOfBooks": int(infoLine[0]),
-			"signup": int(infoLine[1]),
-			"rate": int(infoLine[2]),
-			"books": [int(book) for book in bookLine]
-		}
-		libraries.append(library)
+	next_id = 0
+	for n in range(data.number_of_streets):
+		start, end, name, length =lines[1+n].split()
+		start, end, length = (int(v) for v in (start, end, length))
+		data.graph.add_edge(start, end, length)
+		data.streets[name] = (start, end, length)
+
+	for n in range(data.number_of_cars):
+		[number, *streets] = lines[data.number_of_streets + n].split()
+		data.cars.append(streets)
 	file.close()
-	data["libraries"] = libraries
 	return data
 
 def outputData (path, data):
@@ -39,4 +44,9 @@ def outputData (path, data):
 		for bookId in library["books"]:
 			file.write(f"{bookId} ")
 		file.write("\n")
-	file.close()
+	file.close
+
+
+if __name__ == "__main__":
+	data = (parseFile(sys.argv[1]))
+	print(data)
