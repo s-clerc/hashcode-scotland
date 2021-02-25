@@ -12,7 +12,9 @@ class Data:
 	points: int
 	graph: Graph
 	cars: List[List[str]]
+	# Name to start, end, length
 	streets: Dict[str, Tuple[int, int, int]]
+	# Start, end to name.
 	costreets: Dict[Tuple[int, int], str]
 
 def parseFile(path):
