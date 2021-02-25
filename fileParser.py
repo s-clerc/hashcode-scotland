@@ -55,8 +55,8 @@ def outputData (path, data):
 	for interNum, intersection in data.items():
 
 		numIntersections +=1
-
-		if not (length := len(intersection)):
+		length = len(intersection)
+		if not length:
 			continue
 		file.write(interNum + "\n")
 		file.write(str(length) + "\n")
