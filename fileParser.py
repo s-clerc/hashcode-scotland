@@ -37,16 +37,38 @@ def parseFile(path):
 
 def outputData (path, data):
 	file = open(path, "w")
+	numIntersections =0
 	#Line 0
 	file.write(f"{len(data)}\n")
-	for library in data:
+	""" for library in data:
 		file.write(f"{library['id']} {len(library['books'])}\n")
 		for bookId in library["books"]:
 			file.write(f"{bookId} ")
 		file.write("\n")
-	file.close
+	file.close """
+	#Dict[int (Intersection), List[Tuple[str (Street), int (Time Green)]]]
+
+	for interNum, intersection in data.items():
+
+		numIntersections +=1
+		file.write(interNum, "\n")
+		file.write(len(intersection))
+		
+		for street in intersection:
+
+			streetName = street[0]
+			greenTime = street[1]
+			file.write(streetName, " ", greenTime, "\n")
+
+
+	file.close()
+
+
+
+
 
 
 if __name__ == "__main__":
 	data = (parseFile(sys.argv[1]))
+	outputData(sys.argv[2], data)
 	print(data)
