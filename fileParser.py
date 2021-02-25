@@ -13,6 +13,7 @@ class Data:
 	graph: Graph
 	cars: List[List[str]]
 	streets: Dict[str, Tuple[int, int, int]]
+	costreets: Dict[Tuple[int, int], str]
 
 def parseFile(path):
 	file = open(path, "r")
@@ -20,7 +21,7 @@ def parseFile(path):
 	lines = file.readlines()
 	# Get number of each from line 0
 	line = lines[0].split()
-	data = Data(*[int(value) for value in line], Graph(), [], {})
+	data = Data(*[int(value) for value in line], Graph(), [], {}, {})
 
 	next_id = 0
 	for n in range(data.number_of_streets):
@@ -28,6 +29,7 @@ def parseFile(path):
 		start, end, length = (int(v) for v in (start, end, length))
 		data.graph.add_edge(start, end, length)
 		data.streets[name] = (start, end, length)
+		data.costreets[(start, end)] = name
 
 	for n in range(data.number_of_cars):
 		[number, *streets] = lines[data.number_of_streets + 1+ n].split()
